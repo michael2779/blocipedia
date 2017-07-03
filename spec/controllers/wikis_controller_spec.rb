@@ -44,10 +44,10 @@ RSpec.describe WikisController, type: :controller do
       expect{ my_wiki }.to change(Wiki, :count).by(1)
     end
 
-    # it "assigns the new wiki to @wiki" do
-    #   wiki :create, wiki: {title: "test wiki 4", body: "hi there people"}
-    #   expect(assigns(:wiki)).to eq Wiki.last
-    # end
+    it "assigns the new wiki to @wiki" do
+      post :create, params:{wiki: {title: "test wiki 4", body: "hi there people"}}
+      expect(assigns(:wiki)).to eq Wiki.last
+    end
 
   end
 
