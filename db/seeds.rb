@@ -5,3 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+50.times do
+
+    Wiki.create!(
+      title: Faker::HarryPotter.character,
+      body: Faker::HarryPotter.quote,
+      private: false,
+      user_id: 1
+    )
+end
