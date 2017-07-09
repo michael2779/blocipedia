@@ -1,4 +1,5 @@
 class WikisController < ApplicationController
+
   def index
     @user = User.find_by(id: session[:user_id])
     @wikis = Wiki.all
@@ -18,6 +19,7 @@ class WikisController < ApplicationController
     @wiki.body = params[:wiki][:body]
     @wiki.user_id = current_user.id
     @wiki.private = false
+    authorize @wiki
 
 
     if @wiki.save
@@ -38,6 +40,7 @@ class WikisController < ApplicationController
     @wiki = Wiki.find(params[:id])
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
+    authorize @wiki
 
     if @wiki.save
       flash[:notice] = "Post was updated."
