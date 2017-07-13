@@ -1,8 +1,10 @@
 class WikisController < ApplicationController
 
   def index
-    @user = User.find_by(id: session[:user_id])
-    @wikis = Wiki.all
+    @wikis = policy_scope(Wiki)
+
+    # @user = User.find_by(id: session[:user_id])
+    # @wikis = Wiki.all
   end
 
   def show
@@ -18,7 +20,8 @@ class WikisController < ApplicationController
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
     @wiki.user_id = current_user.id
-    @wiki.private = false
+    @wiki.private = params[:wiki][:private]
+
     authorize @wiki
 
 

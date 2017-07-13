@@ -1,0 +1,11 @@
+<%= form_tag charges_path do %>
+   <h1>Upgrade to premium</h1>
+   <h3>Here is what you get for being premium:</h3>
+   <ul>
+     <li>Free marbles</li>
+     <li>Rock and roll</li>
+     <li>Pizza</li>
+   </ul>
+   <p>Only $1.  Click pay button below</p>
+   <script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount="<%= @stripe_btn_data[:amount] %>" data-description="<%= @stripe_btn_data[:description] %>" ></script>
+ <% end %>

@@ -65,3 +65,5 @@ gem 'rails-controller-testing'
 gem 'pundit'
 
 gem 'faker'
+
+gem 'stripe'

@@ -2,31 +2,36 @@
 <div class="jumbotron">
   <h1>Blocipedia</h1>
   <p>Blocipedia gives you access to community based wikis</p>
+
   <p>
+
     <% if user_signed_in? %>
+      <%= link_to "Go Wiki", wikis_path, class: "btn btn-primary" %>
+    </div>
+      <section>
+
+        <% if current_user.standard? %>
+          <h3>Would you like to sign up for Premium access?</h3>
+          <%= link_to "Sign Up", new_charge_path, class: "btn btn-info" %>
+        <% end %>
+      </section>
+
     <% else %>
       <%= link_to "Sign In", new_user_session_path %> or
       <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary" %>
-    <% end %>
-
-    <% if user_signed_in?%>
-        <%= link_to "Go Wiki", wikis_path, class: "btn btn-primary" %>
-    <% end %>
 
   </p>
+
 </div>
 
-<div class="row">
-  <div class="col-md-4">
-    <h2>Guests</h2>
-    <p>View public wikis created by the Blocipedia community!</p>
-  </div>
-  <div class="col-md-4">
-    <h2>Members</h2>
-    <p>View, create, edit, and delete public wikis.</p>
-  </div>
-  <div class="col-md-4">
-    <h2>Premium Members</h2>
-    <p>All of the Members benefits with the added feature of creating private wikis to which you can add and remove collaborators!</p>
-  </div>
-</div>
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Members</h2>
+          <p>View, create, edit, and delete public wikis.</p>
+        </div>
+        <div class="col-md-6">
+          <h2>Premium Members</h2>
+          <p>All of the Members benefits with the added feature of creating private wikis to which you can add and remove collaborators!</p>
+        </div>
+      </div>
+    <% end %>

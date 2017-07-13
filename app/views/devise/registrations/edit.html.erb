@@ -36,6 +36,25 @@
   </div>
 <% end %>
 
+</br>
+		<div>
+			<div>
+				<h3><%= current_user.role.capitalize %> User</h3>
+			</div>
+			<% if current_user.standard? %>
+				<p>You currenty have a <i><%= current_user.role.capitalize %></i> user profile. You can create both public and private wikis and you can edit wikis that other users create. For more information about upgrading to <i><b>Premium</b></i> click the button below.</p>
+				<div><%= link_to "Upgrade to Premium", new_charge_path, class: "btn btn-primary btn-lg" %></div>
+			<% elsif current_user.premium? %>
+				<p>You currenty have a <i><%= current_user.role.capitalize %></i> user profile. You can create both public and private wikis and you can edit wikis that other users create. Additionally, you can add other users as collaborators for your wikis!!</p>
+				<br />
+				<div><%= link_to "Not happy with Premium?", downgrade_path, class: "btn btn-default btn-sm" %></div>
+				<% elsif current_user.admin? %>
+				<p>You're an <i>Admin</i> user. You can edit and delete any public or private wikis. You can even see private wikis created by other users.</p>
+				<p><i>With great power comes great responsibility.</i></p>
+			<% end %>
+		</div>
+
+</br>
 <h3>Cancel my account</h3>
 
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
