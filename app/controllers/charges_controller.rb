@@ -2,7 +2,15 @@ class ChargesController < ApplicationController
 
   def downgrade
     current_user.update_attributes(role:"standard")
-    flash[:notice] = "You have been cancelled, #{current_user.email}."
+
+    @wikis = Wiki.where(private: true, user_id: current_user.id)
+  
+    @wikis.each do |wiki|
+      wiki.private = false
+      wiki.save!
+    end
+
+    flash[:notice] = "You have been cancelled.  Your private wikis are public, #{current_user.email}."
     redirect_to edit_user_registration_path(current_user)
   end
 
