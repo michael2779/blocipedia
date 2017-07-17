@@ -1,0 +1,24 @@
+<% if @wiki.user_id == current_user.id || current_user.admin? %>
+		<div class="form-group">
+      <% @users.each do |user| %>
+
+				<% if current_user == user %>
+					<!-- Skip this one because it is the current user -->
+				<% else %>
+					<h4><%= user.email %> </h4>
+
+					<% if @wiki.users.include? user %>
+						<div>
+							<%= link_to "Remove Collaborator", collaborator_path(wiki_id: @wiki.id, user_id: user.id), method: :delete, class: 'btn btn-danger' %>
+					  </div>
+					<% else %>
+						<div>
+							<%= link_to "Add Collaborator", collaborators_path(wiki_id: @wiki.id, user_id: user.id), method: :post, class: 'btn btn-info' %>
+						</div>
+					<% end %>
+
+				<% end %>
+			<% end %>
+
+		</div>
+<% end %>

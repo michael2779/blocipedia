@@ -2,9 +2,6 @@ class WikisController < ApplicationController
 
   def index
     @wikis = policy_scope(Wiki)
-
-    # @user = User.find_by(id: session[:user_id])
-    # @wikis = Wiki.all
   end
 
   def show
@@ -37,12 +34,14 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
+    @users = User.all
   end
 
   def update
     @wiki = Wiki.find(params[:id])
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
+    @wiki.private = params[:wiki][:private]
     authorize @wiki
 
     if @wiki.save

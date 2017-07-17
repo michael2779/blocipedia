@@ -4,6 +4,15 @@
    <div class="col-md-8">
      <p><%= (markdown_to_html @wiki.body) %></p>
    </div>
+
+   <div class="col-md-4">
+    <% if @wiki.private %>
+      <% if Collaborator.exists?(wiki_id: @wiki) %>
+        <%= render partial: 'collaborators/users' %>
+      <% end %>
+    <% end %>
+  </div>
+  
    <div class="col-md-4">
      <%= link_to "Back to Wikis", wikis_path, class: 'btn btn-primary' %>
      <%= link_to "Edit", edit_wiki_path(@wiki), class: 'btn btn-success' %>
